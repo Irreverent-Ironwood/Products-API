@@ -1,1 +1,1 @@
-# Related Products API Service
+# Products API Service
