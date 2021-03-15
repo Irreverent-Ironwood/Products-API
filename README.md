@@ -1,1 +1,1 @@
-# SDC-Related-Products
+# Related Products API Service
