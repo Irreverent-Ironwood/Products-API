@@ -2,16 +2,17 @@ DROP DATABASE IF EXITS Product_DB;
 create DATABASE Product_DB;
 use Product_DB;
 --id, name, slogan, description, category, default_price
+CREATE INDEX productindex ON Product(product_id);
 CREATE TABLE Product (
   product_id INTEGER AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL,
   slogan VARCHAR(255) NOT NULL,
   description TEXT NOT NULL,
   category VARCHAR(255) NOT NULL,
-  default_price INTEGER NOT NULL,
+  default_price VARCHAR(255) NOT NULL,
   PRIMARY KEY (product_id)
 );
-
+CREATE INDEX Featuresindex ON Features(product_id);
 CREATE TABLE Features (
   feature_id INTEGER AUTO_INCREMENT,
   product_id INTEGER NOT NULL,
@@ -20,7 +21,9 @@ CREATE TABLE Features (
   PRIMARY KEY (feature_id),
   FOREIGN KEY (product_id) REFERENCES Product(product_id)  ON DELETE CASCADE
 );
-
+-- alter table
+-- create index
+CREATE INDEX Stylesindex ON Styles(product_id);
 CREATE TABLE Styles (
   style_id INTEGER AUTO_INCREMENT,
   product_id INTEGER NOT NULL,
@@ -31,7 +34,7 @@ CREATE TABLE Styles (
   PRIMARY KEY (style_id),
   FOREIGN KEY (product_id) REFERENCES Product(product_id) ON DELETE CASCADE
 );
-
+CREATE INDEX Skusindex ON Skus(style_id);
 CREATE TABLE Skus (
   sku_id INTEGER AUTO_INCREMENT,
   style_id INTEGER NOT NULL,
@@ -41,6 +44,7 @@ CREATE TABLE Skus (
   FOREIGN KEY (style_id) REFERENCES Styles(style_id) ON DELETE CASCADE
 );
 
+CREATE INDEX Photosindex ON Photo(style_id);
  CREATE TABLE Photo (
   photo_id INTEGER AUTO_INCREMENT,
   style_id INTEGER NOT null,
@@ -50,6 +54,7 @@ CREATE TABLE Skus (
   FOREIGN KEY (style_id) REFERENCES Styles(style_id) ON DELETE CASCADE
  );
 
+CREATE INDEX related_productindex ON related_product(product_id);
  CREATE TABLE related_product(
   id INTEGER AUTO_INCREMENT,
   product_id INTEGER NOT NULL,
